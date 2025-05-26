@@ -7,9 +7,10 @@ This project is an **Online Examination System** built using **HTML, CSS, JavaSc
 PROJECT LINK = https://online-examination-system-hvo7.onrender.com/
 
 
-##screen shot =[(![image](https://github.com/user-attachments/assets/7f416c88-f6ef-4541-9c32-998f85a33839))    
-               (https://github.com/PriyanshuPoniaa/Online-Examination-System/blob/e93aec60839c6951ca40bd41afe6980303a54064/oes2.png)]
-               ![image](https://github.com/user-attachments/assets/cac0b783-57f3-48e5-aa14-bbb6a5f69b83)
+##screen shot =![image](https://github.com/user-attachments/assets/7f416c88-f6ef-4541-9c32-998f85a33839)    ![image](https://github.com/user-attachments/assets/0d577ac0-6ded-4c7c-8c30-41fbb8f6a63c)     ![image](https://github.com/user-attachments/assets/cac0b783-57f3-48e5-aa14-bbb6a5f69b83)
+
+               
+           
 
 
 
