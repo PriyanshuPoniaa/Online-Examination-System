@@ -262,11 +262,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// mongodb+srv://onlineexaminationsystem8:dqSgLewSV9gdoXRN@examinationportal.fwvylod.mongodb.net/
+
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://onlineexaminationsystem8:dqSgLewSV9gdoXRN@examinationportal.fwvylod.mongodb.net/', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb+srv://onlineexaminationsystem8:dqSgLewSV9gdoXRN@examinationportal.fwvylod.mongodb.net/',  );
 
 // Define Schemas and Models
 const teacherSchema = new mongoose.Schema({
@@ -485,23 +484,23 @@ app.post('/login', async (req, res) => {
 app.post('/api/suggest-mcq', async (req, res) => {
   const { subject } = req.body;
 
-  if (!subject) {
-      return res.status(400).json({ error: "Subject name is required" });
+  if (!subject || subject.trim() === "") {
+    return res.status(400).json({ error: "Subject name is required" });
   }
 
   try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-      const prompt = `You are a university professor. Please suggest some multiple-choice questions (MCQs) on the subject "${subject}". Include 4 options for each question, and indicate the correct answer.`;
+    const prompt = `You are a university professor. Please suggest 5 multiple-choice questions (MCQs) on the subject "${subject}". For each question, include 4 options labeled A, B, C, D, and clearly indicate the correct answer at the end of each question.`;
 
-      const result = await model.generateContent(prompt);
-      const response = result.response;
-      const text = await response.text();
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = await response.text();
 
-      res.json({ suggestions: text });
+    res.status(200).json({ suggestions: text });
   } catch (error) {
-      console.error("Error generating questions:", error);
-      res.status(500).json({ error: "Error generating questions" });
+    console.error("Error generating questions:", error);
+    res.status(500).json({ error: "Error generating questions" });
   }
 });
 

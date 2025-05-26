@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -102,5 +102,103 @@
 }
 
     </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI MCQ Suggestions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: url('background.jpg') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: #fff;
+    }
+    .container {
+      background-color: rgba(0, 0, 0, 0.75);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    label, input, button {
+      width: 100%;
+      margin-top: 10px;
+    }
+    input[type="text"] {
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    button {
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #suggestions {
+      margin-top: 20px;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI MCQ Suggestions</h1>
+    <label for="subject">Enter Subject Name:</label>
+    <input type="text" id="subject" name="subject" placeholder="e.g., Computer Science"/>
+    <button onclick="getMCQSuggestions()">Get Questions</button>
+    <div id="suggestions"></div>
+  </div>
+
+  <script>
+    async function getMCQSuggestions() {
+      const subject = document.getElementById('subject').value.trim();
+      const suggestionsDiv = document.getElementById('suggestions');
+      if (!subject) {
+        alert("Please enter a subject name.");
+        return;
+      }
+
+      suggestionsDiv.textContent = "Generating questions...";
+
+      try {
+        const res = await fetch('/api/suggest-mcq', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ subject })
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message || "Unknown error");
+
+        suggestionsDiv.innerHTML = `<pre>${data.suggestions || "No suggestions found."}</pre>`;
+      } catch (err) {
+        console.error("Error:", err);
+        suggestionsDiv.textContent = "Error generating questions. Please try again.";
+      }
+    }
+  </script>
 </body>
 </html>
