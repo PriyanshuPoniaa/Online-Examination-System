@@ -25,4 +25,4 @@ PROJECT LINK = https://online-examination-system-hvo7.onrender.com/
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/your-repo.git
+ https://github.com/PriyanshuPoniaa/Online-Examination-System.git
